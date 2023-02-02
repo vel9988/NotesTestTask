@@ -9,21 +9,33 @@
 /* Begin PBXBuildFile section */
 		EA09BE90298B8E5F0068F1F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA09BE8F298B8E5F0068F1F4 /* AppDelegate.swift */; };
 		EA09BE92298B8E5F0068F1F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA09BE91298B8E5F0068F1F4 /* SceneDelegate.swift */; };
-		EA09BE94298B8E5F0068F1F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA09BE93298B8E5F0068F1F4 /* ViewController.swift */; };
-		EA09BE97298B8E5F0068F1F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA09BE95298B8E5F0068F1F4 /* Main.storyboard */; };
+		EA09BE94298B8E5F0068F1F4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA09BE93298B8E5F0068F1F4 /* MainViewController.swift */; };
 		EA09BE99298B8E630068F1F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA09BE98298B8E630068F1F4 /* Assets.xcassets */; };
 		EA09BE9C298B8E630068F1F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA09BE9A298B8E630068F1F4 /* LaunchScreen.storyboard */; };
+		EA09BEA7298B91A40068F1F4 /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA09BEA6298B91A40068F1F4 /* NotesTableViewCell.swift */; };
+		EA09BEAA298B95930068F1F4 /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA09BEA9298B95930068F1F4 /* NoteViewModel.swift */; };
+		EA09BEAD298BA44C0068F1F4 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA09BEAC298BA44C0068F1F4 /* Notes.swift */; };
+		EA09BEAF298BAD440068F1F4 /* CreatingNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA09BEAE298BAD440068F1F4 /* CreatingNoteViewController.swift */; };
+		EA09BEB3298BBF4E0068F1F4 /* ListNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA09BEB2298BBF4E0068F1F4 /* ListNotesViewController.swift */; };
+		EA09BEB6298BC53A0068F1F4 /* NotesTestTaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EA09BEB4298BC53A0068F1F4 /* NotesTestTaskModel.xcdatamodeld */; };
+		EA09BEB9298BCC8A0068F1F4 /* DataPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA09BEB8298BCC8A0068F1F4 /* DataPersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EA09BE8C298B8E5F0068F1F4 /* NotesTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotesTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA09BE8F298B8E5F0068F1F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA09BE91298B8E5F0068F1F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EA09BE93298B8E5F0068F1F4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		EA09BE96298B8E5F0068F1F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EA09BE93298B8E5F0068F1F4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		EA09BE98298B8E630068F1F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA09BE9B298B8E630068F1F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA09BE9D298B8E630068F1F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA09BEA6298B91A40068F1F4 /* NotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
+		EA09BEA9298B95930068F1F4 /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
+		EA09BEAC298BA44C0068F1F4 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
+		EA09BEAE298BAD440068F1F4 /* CreatingNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingNoteViewController.swift; sourceTree = "<group>"; };
+		EA09BEB2298BBF4E0068F1F4 /* ListNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNotesViewController.swift; sourceTree = "<group>"; };
+		EA09BEB5298BC53A0068F1F4 /* NotesTestTaskModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotesTestTaskModel.xcdatamodel; sourceTree = "<group>"; };
+		EA09BEB8298BCC8A0068F1F4 /* DataPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +68,85 @@
 		EA09BE8E298B8E5F0068F1F4 /* NotesTestTask */ = {
 			isa = PBXGroup;
 			children = (
-				EA09BE8F298B8E5F0068F1F4 /* AppDelegate.swift */,
-				EA09BE91298B8E5F0068F1F4 /* SceneDelegate.swift */,
-				EA09BE93298B8E5F0068F1F4 /* ViewController.swift */,
-				EA09BE95298B8E5F0068F1F4 /* Main.storyboard */,
+				EA09BEA4298B90A80068F1F4 /* App */,
+				EA09BEB7298BCC6F0068F1F4 /* Manager */,
+				EA09BEA5298B91270068F1F4 /* View */,
+				EA09BEA3298B90950068F1F4 /* Controller */,
+				EA09BEA8298B95750068F1F4 /* ViewModel */,
+				EA09BEAB298BA3A40068F1F4 /* Model */,
 				EA09BE98298B8E630068F1F4 /* Assets.xcassets */,
 				EA09BE9A298B8E630068F1F4 /* LaunchScreen.storyboard */,
 				EA09BE9D298B8E630068F1F4 /* Info.plist */,
+				EA09BEB4298BC53A0068F1F4 /* NotesTestTaskModel.xcdatamodeld */,
 			);
 			path = NotesTestTask;
+			sourceTree = "<group>";
+		};
+		EA09BEA3298B90950068F1F4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EA09BEB1298BAD560068F1F4 /* General */,
+				EA09BEB0298BAD470068F1F4 /* Core */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EA09BEA4298B90A80068F1F4 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				EA09BE8F298B8E5F0068F1F4 /* AppDelegate.swift */,
+				EA09BE91298B8E5F0068F1F4 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		EA09BEA5298B91270068F1F4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EA09BEA6298B91A40068F1F4 /* NotesTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EA09BEA8298B95750068F1F4 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EA09BEA9298B95930068F1F4 /* NoteViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EA09BEAB298BA3A40068F1F4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EA09BEAC298BA44C0068F1F4 /* Notes.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EA09BEB0298BAD470068F1F4 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				EA09BE93298B8E5F0068F1F4 /* MainViewController.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		EA09BEB1298BAD560068F1F4 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				EA09BEAE298BAD440068F1F4 /* CreatingNoteViewController.swift */,
+				EA09BEB2298BBF4E0068F1F4 /* ListNotesViewController.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		EA09BEB7298BCC6F0068F1F4 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				EA09BEB8298BCC8A0068F1F4 /* DataPersistenceManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +209,6 @@
 			files = (
 				EA09BE9C298B8E630068F1F4 /* LaunchScreen.storyboard in Resources */,
 				EA09BE99298B8E630068F1F4 /* Assets.xcassets in Resources */,
-				EA09BE97298B8E5F0068F1F4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +219,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA09BE94298B8E5F0068F1F4 /* ViewController.swift in Sources */,
+				EA09BEAA298B95930068F1F4 /* NoteViewModel.swift in Sources */,
+				EA09BEAF298BAD440068F1F4 /* CreatingNoteViewController.swift in Sources */,
+				EA09BEB6298BC53A0068F1F4 /* NotesTestTaskModel.xcdatamodeld in Sources */,
+				EA09BE94298B8E5F0068F1F4 /* MainViewController.swift in Sources */,
 				EA09BE90298B8E5F0068F1F4 /* AppDelegate.swift in Sources */,
+				EA09BEB3298BBF4E0068F1F4 /* ListNotesViewController.swift in Sources */,
 				EA09BE92298B8E5F0068F1F4 /* SceneDelegate.swift in Sources */,
+				EA09BEAD298BA44C0068F1F4 /* Notes.swift in Sources */,
+				EA09BEA7298B91A40068F1F4 /* NotesTableViewCell.swift in Sources */,
+				EA09BEB9298BCC8A0068F1F4 /* DataPersistenceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EA09BE95298B8E5F0068F1F4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EA09BE96298B8E5F0068F1F4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EA09BE9A298B8E630068F1F4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +372,6 @@
 				INFOPLIST_FILE = NotesTestTask/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,7 +399,6 @@
 				INFOPLIST_FILE = NotesTestTask/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -358,6 +436,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EA09BEB4298BC53A0068F1F4 /* NotesTestTaskModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EA09BEB5298BC53A0068F1F4 /* NotesTestTaskModel.xcdatamodel */,
+			);
+			currentVersion = EA09BEB5298BC53A0068F1F4 /* NotesTestTaskModel.xcdatamodel */;
+			path = NotesTestTaskModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = EA09BE84298B8E5F0068F1F4 /* Project object */;
 }
