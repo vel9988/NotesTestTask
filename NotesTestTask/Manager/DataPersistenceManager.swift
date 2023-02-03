@@ -19,18 +19,37 @@ final class DataPersistenceManager {
     
     static let shared = DataPersistenceManager()
 
-    func saveNote(with title: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    func saveNote(with noteElement: Note, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         let item = NoteItem(context: context)
         
-        item.title = title
+        item.title = noteElement.noteTitle
+        item.note = noteElement.noteContent
         
         do {
             try context.save()
             completion(.success(()))
         } catch {
             completion(.failure(DatabaseError.failedToSaveData))
+        }
+    }
+    
+    func overwriteNoteInDatabase(newValue: String) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSManagedObject>(entityName: "NoteItem")
+        request.predicate = NSPredicate(format: "propertyName = %@", "value")
+        
+        do {
+            let results = try context.fetch(request)
+            let objectToUpdate = results.first
+            objectToUpdate?.setValue(newValue, forKey: "propertyName")
+
+            try context.save()
+        } catch let error as NSError {
+            print("Error updating object: \(error), \(error.userInfo)")
         }
     }
     
@@ -48,6 +67,7 @@ final class DataPersistenceManager {
             completion(.failure(DatabaseError.failedToFetchData))
         }
     }
+    
     
     func deleteNote(with model: NoteItem, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }

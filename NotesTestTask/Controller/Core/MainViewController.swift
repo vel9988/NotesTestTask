@@ -34,8 +34,6 @@ class MainViewController: UIViewController {
                                                queue: nil) { _ in
             self.fetchLocalNotes()
         }
-
-
         
     }
     
@@ -117,8 +115,15 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let note = notes[indexPath.row]
-        let noteTitle = note.title
+        let note = notes.reversed()[indexPath.row]
+        let noteTitle = note.title ?? ""
+        let noteContent = note.note ?? ""
+        DispatchQueue.main.async { [weak self] in
+            let vc = NoteViewController()
+            vc.configure(with: noteTitle, note: noteContent)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         
     }
     

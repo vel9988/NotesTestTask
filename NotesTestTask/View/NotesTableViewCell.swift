@@ -38,13 +38,12 @@ final class NotesTableViewCell: UITableViewCell {
     
     //MARK: - Setup constraints
     private func setupConstraints() {
-        let noteTextConstraints = [
+        let noteLabelConstraints = [
             noteLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             noteLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             noteLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ]
-        
-        NSLayoutConstraint.activate(noteTextConstraints)
+        NSLayoutConstraint.activate(noteLabelConstraints)
     }
     
 }

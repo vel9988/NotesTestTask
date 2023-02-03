@@ -71,17 +71,9 @@ final class CreatingNoteViewController: UIViewController {
     }
     
     @objc private func createAction() {
-        let vc = ListNotesViewController()
+        let vc = NoteViewController()
         let title = (noteTextField.text == "" ? "New list" : noteTextField.text) ?? ""
-        vc.configure(with: title)
-        DataPersistenceManager.shared.saveNote(with: title) { result in
-            switch result {
-            case .success():
-                NotificationCenter.default.post(name: NSNotification.Name("add"), object: nil)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+        vc.configure(with: title, note: "")
         navigationController?.pushViewController(vc, animated: true)
     }
     
