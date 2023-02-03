@@ -13,6 +13,6 @@ struct Notes {
 
 struct NoteElement {
     let title: String?
-    
+    let note: String?
 }
  
