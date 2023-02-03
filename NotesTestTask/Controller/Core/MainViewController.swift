@@ -9,7 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    private var notes = [NoteElement]()
+    private var notes = [NoteItem]()
     
     private let notesTable: UITableView = {
         let table = UITableView()
@@ -22,11 +22,18 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Notes"
+        view.addSubview(notesTable)
         
         notesTable.delegate = self
         notesTable.dataSource = self
         
         configureNavBar()
+        fetchLocalNotes()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("add"),
+                                               object: nil,
+                                               queue: nil) { _ in
+            self.fetchLocalNotes()
+        }
 
 
         
@@ -35,6 +42,20 @@ class MainViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         notesTable.frame = view.bounds
+    }
+    
+    private func fetchLocalNotes() {
+        DataPersistenceManager.shared.fetchingNotesFromDatabase { [weak self] result in
+            switch result {
+            case .success(let notes):
+                self?.notes = notes
+                DispatchQueue.main.async {
+                    self?.notesTable.reloadData()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     private func configureNavBar() {
@@ -69,11 +90,40 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = NotesTableViewCell.identifier
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? NotesTableViewCell else { return UITableViewCell() }
-        let note = notes[indexPath.row]
-        let noteTitle = note.title ?? "Notes"
+        cell.backgroundColor = .systemBlue
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        let note = notes.reversed()[indexPath.row]
+        let noteTitle = note.title ?? "Note"
         cell.configure(with: NoteViewModel(noteTitle: noteTitle))
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            DataPersistenceManager.shared.deleteNote(with: notes[indexPath.row]) { [weak self] result in
+                switch result {
+                case .success():
+                    self?.notes.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        default:
+            break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let note = notes[indexPath.row]
+        let noteTitle = note.title
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        60
     }
     
     
