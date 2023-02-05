@@ -77,7 +77,7 @@ final class CreatingNoteViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    //MARK: - setupConstraint
+    //MARK: - Setup constraint
     private func setupConstraints() {
         let noteTextFieldConstraint = [
             noteTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),

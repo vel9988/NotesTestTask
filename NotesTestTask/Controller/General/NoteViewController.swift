@@ -9,6 +9,10 @@ import UIKit
 
 class NoteViewController: UIViewController {
     
+    //MARK: - Property
+    private var initialText = ""
+    
+    // MARK: - Subviews
     private let noteTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -16,6 +20,7 @@ class NoteViewController: UIViewController {
         return textView
     }()
 
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -24,10 +29,13 @@ class NoteViewController: UIViewController {
         view.addSubview(noteTextView)
         setupConstraints()
         
+        initialText = noteTextView.text
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
 
     }
     
+    //MARK: - Setup constraint
     private func setupConstraints() {
         let noteTextViewConstraints = [
             noteTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
@@ -38,17 +46,24 @@ class NoteViewController: UIViewController {
         NSLayoutConstraint.activate(noteTextViewConstraints)
     }
     
+    //MARK: - Buttons methods
     @objc private func saveButtonTapped() {
-        let noteElement = Note(noteTitle: title, noteContent: noteTextView.text)
-        DataPersistenceManager.shared.saveNote(with: noteElement) { result in
-            switch result {
-            case .success():
-                NotificationCenter.default.post(name: NSNotification.Name("add"), object: nil)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
+//        let noteElement = Note(noteTitle: title, noteContent: noteTextView.text)
+        
+        if noteTextView.text != initialText {
+            DataPersistenceManager.shared.overwriteNoteInDatabase(title: title ?? "", newNote: noteTextView.text)
+            self.navigationController?.popToRootViewController(animated: true)
         }
-        self.navigationController?.popToRootViewController(animated: true)
+        
+//        DataPersistenceManager.shared.saveNote(with: noteElement) { result in
+//            switch result {
+//            case .success():
+//                NotificationCenter.default.post(name: NSNotification.Name("add"), object: nil)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//        self.navigationController?.popToRootViewController(animated: true)
     }
 
     

@@ -35,17 +35,17 @@ final class DataPersistenceManager {
         }
     }
     
-    func overwriteNoteInDatabase(newValue: String) {
+    func overwriteNoteInDatabase(title: String ,newNote: String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         
         let request = NSFetchRequest<NSManagedObject>(entityName: "NoteItem")
-        request.predicate = NSPredicate(format: "propertyName = %@", "value")
+        request.predicate = NSPredicate(format: "title = %@", title)
         
         do {
             let results = try context.fetch(request)
             let objectToUpdate = results.first
-            objectToUpdate?.setValue(newValue, forKey: "propertyName")
+            objectToUpdate?.setValue(newNote, forKey: "note")
 
             try context.save()
         } catch let error as NSError {

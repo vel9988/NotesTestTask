@@ -24,6 +24,7 @@ class MainViewController: UIViewController {
         title = "Notes"
         view.addSubview(notesTable)
         
+        
         notesTable.delegate = self
         notesTable.dataSource = self
         
@@ -35,6 +36,13 @@ class MainViewController: UIViewController {
             self.fetchLocalNotes()
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationItem.largeTitleDisplayMode = .never
     }
     
     override func viewDidLayoutSubviews() {
