@@ -10,7 +10,7 @@ import UIKit
 class NoteViewController: UIViewController {
     
     //MARK: - Property
-    private var initialText = ""
+    private var isNewNote = true
     
     // MARK: - Subviews
     private let noteTextView: UITextView = {
@@ -19,7 +19,7 @@ class NoteViewController: UIViewController {
         textView.font = UIFont.systemFont(ofSize: 18)
         return textView
     }()
-
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +29,8 @@ class NoteViewController: UIViewController {
         view.addSubview(noteTextView)
         setupConstraints()
         
-        initialText = noteTextView.text
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
-
+        
     }
     
     //MARK: - Setup constraint
@@ -43,36 +41,37 @@ class NoteViewController: UIViewController {
             noteTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             noteTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ]
+        
         NSLayoutConstraint.activate(noteTextViewConstraints)
     }
     
     //MARK: - Buttons methods
     @objc private func saveButtonTapped() {
-//        let noteElement = Note(noteTitle: title, noteContent: noteTextView.text)
+        let noteElement = Note(noteTitle: title, noteContent: noteTextView.text)
         
-        if noteTextView.text != initialText {
+        if isNewNote {
+            DataPersistenceManager.shared.saveNote(with: noteElement) { result in
+                switch result {
+                case .success():
+                    NotificationCenter.default.post(name: NSNotification.Name("add"), object: nil)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        } else {
             DataPersistenceManager.shared.overwriteNoteInDatabase(title: title ?? "", newNote: noteTextView.text)
-            self.navigationController?.popToRootViewController(animated: true)
         }
-        
-//        DataPersistenceManager.shared.saveNote(with: noteElement) { result in
-//            switch result {
-//            case .success():
-//                NotificationCenter.default.post(name: NSNotification.Name("add"), object: nil)
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-//        self.navigationController?.popToRootViewController(animated: true)
-    }
+        self.navigationController?.popToRootViewController(animated: true)
 
+    }
     
-    func configure(with title: String, note: String) {
+    func configure(with title: String, note: String, isNewNote: Bool) {
         self.title = title
         noteTextView.text = note
+        self.isNewNote = isNewNote
     }
-
-
+    
+    
 }
 
 

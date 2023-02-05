@@ -128,7 +128,7 @@ extension MainViewController: UITableViewDataSource {
         let noteContent = note.note ?? ""
         DispatchQueue.main.async { [weak self] in
             let vc = NoteViewController()
-            vc.configure(with: noteTitle, note: noteContent)
+            vc.configure(with: noteTitle, note: noteContent, isNewNote: false)
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         

@@ -53,6 +53,22 @@ final class DataPersistenceManager {
         }
     }
     
+    func checkingDuplicateInDatabase(title: String) -> Bool {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return false }
+        let context = appDelegate.persistentContainer.viewContext
+
+        let request = NSFetchRequest<NSManagedObject>(entityName: "NoteItem")
+        request.predicate = NSPredicate(format: "title = %@", title)
+        
+        do {
+            let results = try context.fetch(request)
+            return results.count > 0
+        } catch let error as NSError {
+            print("Error updating object: \(error), \(error.userInfo)")
+            return false
+        }
+    }
+    
     func fetchingNotesFromDatabase(completion: @escaping (Result<[NoteItem], Error>) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext

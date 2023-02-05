@@ -57,7 +57,6 @@ final class CreatingNoteViewController: UIViewController {
         backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         createButton.addTarget(self, action: #selector(createAction), for: .touchUpInside)
         
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -71,9 +70,9 @@ final class CreatingNoteViewController: UIViewController {
     }
     
     @objc private func createAction() {
+        let title = (noteTextField.text == "" ? "New note" : noteTextField.text) ?? ""
         let vc = NoteViewController()
-        let title = (noteTextField.text == "" ? "New list" : noteTextField.text) ?? ""
-        vc.configure(with: title, note: "")
+        vc.configure(with: title, note: "", isNewNote: true)
         navigationController?.pushViewController(vc, animated: true)
     }
     
