@@ -84,7 +84,7 @@ final class CreatingNoteViewController: UIViewController {
         let vc = NoteViewController()
         vc.modalPresentationStyle = .overCurrentContext
         vc.modalTransitionStyle = .coverVertical
-        vc.configure(with: title, note: "", isNewNote: true)
+        vc.configure(with: title, note: "", isNewNote: true, noteImage: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
     

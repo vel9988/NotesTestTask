@@ -130,11 +130,15 @@ extension MainViewController: UITableViewDataSource {
         let note = notes.reversed()[indexPath.row]
         let noteTitle = note.title ?? ""
         let noteContent = note.note ?? ""
+        let image: UIImage?
+        if note.image == nil {
+            image = nil
+        } else {
+            image = UIImage(data: note.image!)
+        }
         DispatchQueue.main.async { [weak self] in
             let vc = NoteViewController()
-            vc.modalPresentationStyle = .overCurrentContext
-            vc.modalTransitionStyle = .coverVertical
-            vc.configure(with: noteTitle, note: noteContent, isNewNote: false)
+            vc.configure(with: noteTitle, note: noteContent, isNewNote: false, noteImage: image)
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         

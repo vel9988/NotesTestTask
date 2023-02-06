@@ -85,7 +85,9 @@ class NoteViewController: UIViewController {
     }
     
     @objc private func saveButtonTapped() {
-        let noteElement = Note(noteTitle: title, noteContent: noteTextView.text)
+        let image = noteImageView.image
+        let imageData = image?.jpegData(compressionQuality: 0.8)
+        let noteElement = Note(noteTitle: title, noteContent: noteTextView.text, noteImage: imageData)
         if isNewNote {
             DataPersistenceManager.shared.saveNote(with: noteElement) { result in
                 switch result {
@@ -103,24 +105,13 @@ class NoteViewController: UIViewController {
     }
     
     //MARK: - Configure
-    func configure(with title: String, note: String, isNewNote: Bool) {
+    func configure(with title: String, note: String, isNewNote: Bool, noteImage: UIImage?) {
         self.title = title
         noteTextView.text = note
         self.isNewNote = isNewNote
+        noteImageView.image = noteImage
     }
     
-}
-
-extension NoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let selectedImage = info[.originalImage] as? UIImage {
-            noteImageView.image = selectedImage
-            NSLayoutConstraint.deactivate(noteImageViewConstraints)
-            NSLayoutConstraint.deactivate(noteTextViewConstraints)
-            setupConstraints()
-        }
-        dismiss(animated: true, completion: nil)
-    }
 }
 
 extension NoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

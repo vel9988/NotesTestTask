@@ -10,5 +10,6 @@ import Foundation
 struct Note {
     let noteTitle: String?
     let noteContent: String?
+    let noteImage: Data?
 }
  

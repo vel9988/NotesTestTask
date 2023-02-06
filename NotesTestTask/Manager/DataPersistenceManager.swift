@@ -27,6 +27,7 @@ final class DataPersistenceManager {
         
         item.title = noteElement.noteTitle
         item.note = noteElement.noteContent
+        item.image = noteElement.noteImage
         
         do {
             try context.save()
