@@ -70,6 +70,7 @@ final class CreatingNoteViewController: UIViewController {
         setupConstraints()
     }
     
+    //MARK: - Gesture method
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }

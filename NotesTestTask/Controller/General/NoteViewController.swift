@@ -36,14 +36,17 @@ class NoteViewController: UIViewController {
         
         view.addSubview(noteImageView)
         view.addSubview(noteTextView)
-        
+
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(barButtonSystemItem: .save,
                             target: self,
                             action: #selector(saveButtonTapped)),
             UIBarButtonItem(barButtonSystemItem: .camera,
                             target: self,
-                            action: #selector(selectPhoto))
+                            action: #selector(selectPhoto)),
+            UIBarButtonItem(barButtonSystemItem: .close,
+                            target: self,
+                            action: #selector(hideKeyboard))
         ]
         
     }
@@ -76,7 +79,7 @@ class NoteViewController: UIViewController {
         NSLayoutConstraint.activate(noteTextViewConstraints)
     }
     
-    //MARK: - Buttons methods
+    //MARK: - Bar buttons methods
     @objc private func selectPhoto() {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
@@ -104,6 +107,10 @@ class NoteViewController: UIViewController {
 
     }
     
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
     //MARK: - Configure
     func configure(with title: String, note: String, isNewNote: Bool, noteImage: UIImage?) {
         self.title = title
@@ -114,6 +121,7 @@ class NoteViewController: UIViewController {
     
 }
 
+//MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension NoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[.originalImage] as? UIImage {
@@ -125,6 +133,7 @@ extension NoteViewController: UIImagePickerControllerDelegate, UINavigationContr
         dismiss(animated: true, completion: nil)
     }
 }
+
 
 
 
