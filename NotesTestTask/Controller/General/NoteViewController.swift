@@ -123,4 +123,19 @@ extension NoteViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 }
 
+extension NoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[.originalImage] as? UIImage {
+            noteImageView.image = selectedImage
+            NSLayoutConstraint.deactivate(noteImageViewConstraints)
+            NSLayoutConstraint.deactivate(noteTextViewConstraints)
+            setupConstraints()
+        }
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+
+
+
 
