@@ -13,6 +13,7 @@ final class DataPersistenceManager {
     
     enum DatabaseError: Error {
         case failedToSaveData
+        case failedToOverwriteNote
         case failedToFetchData
         case failedToDeleteData
     }
@@ -35,7 +36,7 @@ final class DataPersistenceManager {
         }
     }
     
-    func overwriteNoteInDatabase(title: String ,newNote: String) {
+    func overwriteNoteInDatabase(title: String, newNote: String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         
@@ -46,10 +47,9 @@ final class DataPersistenceManager {
             let results = try context.fetch(request)
             let objectToUpdate = results.first
             objectToUpdate?.setValue(newNote, forKey: "note")
-
             try context.save()
-        } catch let error as NSError {
-            print("Error updating object: \(error), \(error.userInfo)")
+        } catch {
+            print(DatabaseError.failedToOverwriteNote.localizedDescription)
         }
     }
     

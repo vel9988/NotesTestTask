@@ -27,28 +27,34 @@ class NoteViewController: UIViewController {
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         
         view.addSubview(noteTextView)
-        setupConstraints()
+//        setupConstraints()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
+                                                            target: self,
+                                                            action: #selector(saveButtonTapped))
         
     }
     
-    //MARK: - Setup constraint
-    private func setupConstraints() {
-        let noteTextViewConstraints = [
-            noteTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            noteTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            noteTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            noteTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
-        ]
-        
-        NSLayoutConstraint.activate(noteTextViewConstraints)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        noteTextView.frame = view.bounds
     }
+    
+    //MARK: - Setup constraint
+//    private func setupConstraints() {
+//        let noteTextViewConstraints = [
+//            noteTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+//            noteTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+//            noteTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+//            noteTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+//        ]
+//
+//        NSLayoutConstraint.activate(noteTextViewConstraints)
+//    }
     
     //MARK: - Buttons methods
     @objc private func saveButtonTapped() {
         let noteElement = Note(noteTitle: title, noteContent: noteTextView.text)
-        
         if isNewNote {
             DataPersistenceManager.shared.saveNote(with: noteElement) { result in
                 switch result {
@@ -65,6 +71,7 @@ class NoteViewController: UIViewController {
 
     }
     
+    //MARK: - Configure
     func configure(with title: String, note: String, isNewNote: Bool) {
         self.title = title
         noteTextView.text = note

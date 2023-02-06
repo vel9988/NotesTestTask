@@ -9,8 +9,12 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    //MARK: - Property
     private var notes = [NoteItem]()
     
+//    private let defaultNote = Note(noteTitle: "Default note", noteContent: "Hello world") // ????????????
+    
+    // MARK: - Subviews
     private let notesTable: UITableView = {
         let table = UITableView()
         let identifier = NotesTableViewCell.identifier
@@ -18,12 +22,12 @@ class MainViewController: UIViewController {
         return table
     }()
 
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Notes"
         view.addSubview(notesTable)
-        
         
         notesTable.delegate = self
         notesTable.dataSource = self
@@ -40,7 +44,6 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationItem.largeTitleDisplayMode = .never
     }
@@ -50,6 +53,7 @@ class MainViewController: UIViewController {
         notesTable.frame = view.bounds
     }
     
+    //MARK: - Private method
     private func fetchLocalNotes() {
         DataPersistenceManager.shared.fetchingNotesFromDatabase { [weak self] result in
             switch result {
@@ -72,6 +76,7 @@ class MainViewController: UIViewController {
                                                             action: #selector(addAction))
     }
     
+    //MARK: - Button method
     @objc private func addAction() {
         DispatchQueue.main.async { [weak self] in
             let vc = CreatingNoteViewController()
@@ -128,6 +133,8 @@ extension MainViewController: UITableViewDataSource {
         let noteContent = note.note ?? ""
         DispatchQueue.main.async { [weak self] in
             let vc = NoteViewController()
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.modalTransitionStyle = .coverVertical
             vc.configure(with: noteTitle, note: noteContent, isNewNote: false)
             self?.navigationController?.pushViewController(vc, animated: true)
         }

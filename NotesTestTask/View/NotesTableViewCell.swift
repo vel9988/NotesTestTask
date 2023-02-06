@@ -9,8 +9,10 @@ import UIKit
 
 final class NotesTableViewCell: UITableViewCell {
     
+    //MARK: - Property
     static let identifier = "NotesTableViewCell"
     
+    // MARK: - Subviews
     private let noteLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

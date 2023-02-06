@@ -8,7 +8,7 @@
 import UIKit
 
 final class CreatingNoteViewController: UIViewController {
-    
+        
     // MARK: - Subviews
     private let noteTextField: UITextField = {
         let textField = UITextField()
@@ -53,15 +53,25 @@ final class CreatingNoteViewController: UIViewController {
         view.addSubview(noteTextField)
         view.addSubview(createButton)
         view.addSubview(backButton)
-        
+                
         backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         createButton.addTarget(self, action: #selector(createAction), for: .touchUpInside)
         
+        noteTextField.delegate = self
+        
+        createButton.isEnabled = false
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupConstraints()
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     //MARK: - Buttons methods
@@ -70,8 +80,10 @@ final class CreatingNoteViewController: UIViewController {
     }
     
     @objc private func createAction() {
-        let title = (noteTextField.text == "" ? "New note" : noteTextField.text) ?? ""
+        guard let title = noteTextField.text else { return }
         let vc = NoteViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .coverVertical
         vc.configure(with: title, note: "", isNewNote: true)
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -105,4 +117,15 @@ final class CreatingNoteViewController: UIViewController {
     }
     
 
+}
+
+//MARK: - UITextFieldDelegate
+extension CreatingNoteViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text, let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange, with: string)
+            createButton.isEnabled = !updatedText.isEmpty
+        }
+        return true
+    }
 }
