@@ -12,7 +12,6 @@ class MainViewController: UIViewController {
     //MARK: - Property
     private var notes = [NoteItem]()
     
-//    private let defaultNote = Note(noteTitle: "Default note", noteContent: "Hello world") // ????????????
     
     // MARK: - Subviews
     private let notesTable: UITableView = {
