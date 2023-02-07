@@ -11,8 +11,7 @@ class MainViewController: UIViewController {
     
     //MARK: - Property
     private var notes = [NoteItem]()
-    
-    
+
     // MARK: - Subviews
     private let notesTable: UITableView = {
         let table = UITableView()

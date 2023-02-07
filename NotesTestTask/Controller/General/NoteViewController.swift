@@ -101,7 +101,7 @@ class NoteViewController: UIViewController {
                 }
             }
         } else {
-            DataPersistenceManager.shared.overwriteNoteInDatabase(title: title ?? "", newNote: noteTextView.text)
+            DataPersistenceManager.shared.overwriteNoteInDatabase(with: noteElement)
         }
         self.navigationController?.popToRootViewController(animated: true)
 

@@ -37,36 +37,21 @@ final class DataPersistenceManager {
         }
     }
     
-    func overwriteNoteInDatabase(title: String, newNote: String) {
+    func overwriteNoteInDatabase(with noteElement: Note) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         
         let request = NSFetchRequest<NSManagedObject>(entityName: "NoteItem")
-        request.predicate = NSPredicate(format: "title = %@", title)
+        request.predicate = NSPredicate(format: "title = %@", noteElement.noteTitle ?? "")
         
         do {
             let results = try context.fetch(request)
             let objectToUpdate = results.first
-            objectToUpdate?.setValue(newNote, forKey: "note")
+            objectToUpdate?.setValue(noteElement.noteContent, forKey: "note")
+            objectToUpdate?.setValue(noteElement.noteImage, forKey: "image")
             try context.save()
         } catch {
             print(DatabaseError.failedToOverwriteNote.localizedDescription)
-        }
-    }
-    
-    func checkingDuplicateInDatabase(title: String) -> Bool {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return false }
-        let context = appDelegate.persistentContainer.viewContext
-
-        let request = NSFetchRequest<NSManagedObject>(entityName: "NoteItem")
-        request.predicate = NSPredicate(format: "title = %@", title)
-        
-        do {
-            let results = try context.fetch(request)
-            return results.count > 0
-        } catch let error as NSError {
-            print("Error updating object: \(error), \(error.userInfo)")
-            return false
         }
     }
     
